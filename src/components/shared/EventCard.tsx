@@ -36,17 +36,12 @@ export interface EventStructure {
 }
 
 const EventCard = ({ event }: { event: EventStructure }) => {
-  /*   if (!event.startDate) {
-    return;
-  } */
-
-  /*   const month = extractMonthFromDateString(event.startDate); */
   const month = event.startDate?.split("-")[1];
   const day = event.startDate?.split("-")[2];
 
   return (
     <Link href={`/events/${event._id}`}>
-      <article className="text-neutral-700 flex flex-col  shadow-md rounded-lg bg-neutral-100 overflow-hidden">
+      <article className="text-neutral-200 flex flex-col  shadow-md rounded-lg  overflow-hidden hover:scale-105 duration-500 transition-all">
         <div>
           <Image
             src={`/assets/images/simulators/${event.simulator}.webp`}
@@ -57,9 +52,9 @@ const EventCard = ({ event }: { event: EventStructure }) => {
             priority
           />
         </div>
-        <div className="p-4 py-2 flex flex-col gap-1">
+        <div className="p-4 py-2 flex flex-col gap-1 bg-transparent/20 backdrop-blur-sm">
           <div className="flex gap-1 items-center justify-between">
-            <h2 className="text-red-700 font-bold text-lg">
+            <h2 className="text-slate-200 font-bold text-lg">
               {event.eventType}
             </h2>
             <Image
@@ -70,7 +65,7 @@ const EventCard = ({ event }: { event: EventStructure }) => {
               className="cursor-pointer"
             />
           </div>
-          <div className="flex gap-1 justify-between">
+          <div className="flex gap-1 justify-between  ">
             <div className="flex gap-1 justify-between  ">
               <div className="flex flex-col gap-0">
                 <div className="flex gap-2 items-center">
@@ -81,7 +76,7 @@ const EventCard = ({ event }: { event: EventStructure }) => {
                     height={12}
                     className=""
                   />
-                  <p className="text-neutral-700 text-sm ">{event.location}</p>
+                  <p className="text-neutral-200 text-sm ">{event.location}</p>
                 </div>
                 <div className="flex gap-2 items-center">
                   <div className="flex gap-2 items-center">
@@ -100,7 +95,7 @@ const EventCard = ({ event }: { event: EventStructure }) => {
                       alt={"icono de persona"}
                       width={12}
                       height={12}
-                      className="text-neutral-700"
+                      className="text-neutral-200"
                     />
                     <p className="text-xs">{event.slots}</p>
                   </div>
@@ -116,7 +111,7 @@ const EventCard = ({ event }: { event: EventStructure }) => {
                     alt="reloj"
                     width={12}
                     height={12}
-                    className="text-neutral-700"
+                    className="text-neutral-200"
                   />
                   <p className="text-xs text-right ">{event.duration} min</p>
                 </div>
@@ -126,7 +121,7 @@ const EventCard = ({ event }: { event: EventStructure }) => {
                     alt="calendario"
                     width={12}
                     height={12}
-                    className="text-neutral-700"
+                    className="text-neutral-200"
                   />
                   <p className="text-xs">
                     {day}/{month}

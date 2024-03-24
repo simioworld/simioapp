@@ -82,6 +82,13 @@ export const getEventsForCarousel = query({
   },
 });
 
+export const getTwoEvents = query({
+  handler: async (ctx) => {
+    const events = await ctx.db.query("events").take(2);
+    return events;
+  },
+});
+
 export const getEvent = query({
   args: { eventId: v.id("events") },
   handler: async (ctx, { eventId }) => {
