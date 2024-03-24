@@ -1,11 +1,5 @@
 import About from "@/components/About";
-import Communities from "@/components/Communities";
-import Recomendator from "@/components/Recomendator";
-import Social from "@/components/Social";
 import Header from "@/components/shared/Header";
-import Events from "@/components/Events";
-import Box from "@/components/Box";
-import Link from "next/link";
 import CardLinksItems from "@/components/shared/CardLinks";
 
 const DashboardLayout = ({
