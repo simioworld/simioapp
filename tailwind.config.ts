@@ -13,11 +13,22 @@ const config = {
     container: {
       center: true,
       padding: "2rem",
-      screens: {
+      /*       screens: {
         "2xl": "1400px",
-      },
+      }, */
     },
     extend: {
+      screens: {
+        xs: "480px",
+        sm: "640px",
+        md: "768px",
+        lg: "1024px",
+        xl: "1280px",
+        "2xl": "1536px",
+      },
+      gridTemplateColumns: {
+        "auto-fit-250": "repeat(auto-fit, 250px)",
+      },
       fontSize: {
         xxs: "0.625rem",
         xs: "0.75rem",
