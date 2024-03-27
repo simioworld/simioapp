@@ -21,7 +21,7 @@ export default function Home() {
 
   return (
     <main
-      className={`${staatliches.className} text-red-800 dark:text-red-100  bg-neutral-300 flex flex-col items-center`}
+      className={`${staatliches.className} text-red-800  bg-neutral-300 flex flex-col items-center`}
     >
       <section className="flex w-full flex-col items-center justify-center gap-4 min-h-screen relative ">
         <Image
