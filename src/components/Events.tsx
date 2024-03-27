@@ -1,22 +1,34 @@
-import Image from "next/image";
-import { Staatliches } from "next/font/google";
+"use client";
 
-const staatliches = Staatliches({ subsets: ["latin"], weight: ["400"] });
+import { eventsNavLinks, staatliches } from "@/constants";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+
 const Events = () => {
+  const pathname = usePathname();
   return (
-    <article className="h-full relative p-4 sm:p-6 flex flex-col text-neutral-200">
+    <nav className="h-full relative  flex flex-col text-neutral-200">
       <h4
-        className={`${staatliches.className} tracking-wide font-bold uppercase text-2xl text-slate-100`}
+        className={`${staatliches.className} tracking-wide font-bold uppercase text-3xl text-slate-100`}
       >
         Eventos
       </h4>
-      <ul className="mt-2 font-light">
-        <li>campeonatos</li>
-        <li>carreras</li>
-        <li>retos</li>
-        <li>resistencias</li>
+      <ul className=" font-light">
+        {eventsNavLinks.map((link) => {
+          const isActive = pathname === link.path;
+          return (
+            <li
+              key={link.label}
+              className={`${
+                isActive && "text-orange-400 font-medium"
+              } text-sm border-b-2 border-transparent hover:border-orange-500 hover:border-b-2`}
+            >
+              <Link href={link.path}>{link.title}</Link>
+            </li>
+          );
+        })}
       </ul>
-    </article>
+    </nav>
   );
 };
 
