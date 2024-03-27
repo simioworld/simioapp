@@ -40,12 +40,7 @@ export default defineSchema(
       discordCommunity: v.string(),
       userId: v.string(),
       userName: v.string(),
-    })
-      .index("by_community", ["community"])
-      .searchIndex("search_title", {
-        searchField: "title",
-        filterFields: ["community"],
-      }),
+    }).index("by_eventType", ["eventType"]),
 
     communities: defineTable({
       name: v.string(),
