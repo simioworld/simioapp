@@ -3,34 +3,31 @@ import { ModeToggle } from "../ModeToggle";
 import { SignedIn, SignedOut, UserButton } from "@clerk/nextjs";
 import { Button } from "../ui/button";
 import MobileNav from "./MobileNav";
-import NavItems from "./NavItems";
-import Image from "next/image";
-import { Staatliches } from "next/font/google";
 
-const staatliches = Staatliches({ subsets: ["latin"], weight: ["400"] });
+import Image from "next/image";
+import { staatliches } from "@/constants";
+import SearchBar from "./SearchBar";
 
 const Header = () => {
   return (
-    <header className="w-full h-16  p-8 flex justify-between items-center">
-      <div className="flex items-center">
-        <Image
-          src="/assets/logos/helmet-white.svg"
-          alt="casco"
-          width={"42"}
-          height={"42"}
-        />
-        <Link
-          href="/"
-          className={`${staatliches.className} text-4xl text-slate-400/90`}
-        >
-          Simoworld{" "}
-        </Link>
-      </div>
-      {/*       <div className="flex items-center gap-4">
-        <div className="md:flex hidden items-center gap-4">
-          <NavItems />
+    <header className="w-full flex justify-between items-center gap-8">
+      <Link href={"/dashboard"}>
+        <div className="flex items-center">
+          <Image
+            src="/assets/logos/helmet-white.svg"
+            alt="casco"
+            width={"42"}
+            height={"42"}
+          />
+          <Link
+            href="/dashboard"
+            className={`${staatliches.className} text-4xl text-slate-400/90`}
+          >
+            Simoworld{" "}
+          </Link>
         </div>
-      </div> */}
+      </Link>
+
       <div className="hidden md:flex">
         {" "}
         <SignedIn>
