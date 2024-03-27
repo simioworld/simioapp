@@ -99,3 +99,15 @@ export const getEvent = query({
     return event;
   },
 });
+
+export const getTypeEvents = query({
+  args: { eventType: v.string() },
+  handler: async (ctx, args) => {
+    const events = await ctx.db
+      .query("events")
+      .filter((q) => q.eq(q.field("eventType"), args.eventType))
+
+      .collect();
+    return events;
+  },
+});
