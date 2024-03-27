@@ -28,7 +28,7 @@ import { useMutation } from "convex/react";
 import { api } from "../../../convex/_generated/api";
 
 import Image from "next/image";
-import { auth } from "@clerk/nextjs";
+import { staatliches } from "@/constants";
 
 interface EventFormProps {
   type: "Crear" | "Editar";
@@ -76,16 +76,11 @@ const EventForm = ({ type }: EventFormProps) => {
           price: values.price,
           community: values.community,
           discordCommunity: values.discordCommunity,
-
-          /*
-  isFree: values.isFree,
-        */
         });
 
-        console.log(newEvent);
         if (newEvent) {
           form.reset();
-          router.push(`/events/${newEvent}`);
+          router.push(`/dashboard/${newEvent}`);
         }
       } catch (error) {
         console.log(error);
@@ -94,14 +89,7 @@ const EventForm = ({ type }: EventFormProps) => {
   };
 
   return (
-    <article className="p-2 overflow-hidden flex flex-col place-items-center w-full sm:min-w-3/5  shadow-lg rounded-lg relative  ">
-      <Image
-        src="/assets/images/neumaticos.webp"
-        alt="marcas de neumaticos de fondo"
-        width={800}
-        height={100}
-        className=" absolute h-full opacity-10 top-0 left-0 -z-10"
-      />
+    <article className="p-2 overflow-hidden flex flex-col place-items-center w-full sm:min-w-3/5  shadow-lg rounded-lg  z-20 ">
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
@@ -112,13 +100,13 @@ const EventForm = ({ type }: EventFormProps) => {
               control={form.control}
               name="title"
               render={({ field }) => (
-                <FormItem className="space-y-0">
+                <FormItem className="w-full space-y-0">
                   <FormLabel className="">Título</FormLabel>
                   <FormControl>
                     <Input
-                      placeholder="Título del evento"
+                      placeholder="Pachanga con amigos"
                       {...field}
-                      className="input-field"
+                      className="input-field text-slate-800"
                     />
                   </FormControl>
 
@@ -209,7 +197,7 @@ const EventForm = ({ type }: EventFormProps) => {
                           className="absolute left-1 top-1/2 transform -translate-y-1/2 pl-1"
                         />
                         <Input
-                          placeholder="Añade un circuito"
+                          placeholder="Barcelona"
                           {...field}
                           className="input-field pl-6"
                         />
@@ -310,7 +298,7 @@ const EventForm = ({ type }: EventFormProps) => {
                   <FormControl>
                     <Textarea
                       placeholder="Detalla las características del evento"
-                      className="resize-none bg-neutral-100"
+                      className="resize-none bg-neutral-100 text-slate-800"
                       {...field}
                     />
                   </FormControl>
@@ -330,10 +318,10 @@ const EventForm = ({ type }: EventFormProps) => {
                       <div className="flex items-center overflow-hidden h-7 rounded-md bg-neutral-100 py-2 text-sm relative">
                         <Image
                           src="/assets/icons/euro.svg"
-                          alt="track"
+                          alt="euro"
                           width={16}
                           height={16}
-                          className="absolute left-1 top-1/2 transform -translate-y-1/2 pl-1"
+                          className="absolute left-1 top-1/2 transform -translate-y-1/2 pl-1 "
                         />
                         <Input
                           placeholder=""
@@ -444,7 +432,12 @@ const EventForm = ({ type }: EventFormProps) => {
               />
             </div>
           </div>
-          <Button type="submit">{type} evento</Button>
+          <Button
+            className={`bg-orange-500/90 py-1 text-xl text-slate-800/80 ${staatliches.className}`}
+            type="submit"
+          >
+            {type} evento
+          </Button>
         </form>
       </Form>
     </article>
