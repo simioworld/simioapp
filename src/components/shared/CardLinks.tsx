@@ -1,12 +1,9 @@
 "use client";
 
-import { dashboardNavLinks } from "@/constants";
+import { dashboardNavLinks, staatliches } from "@/constants";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Staatliches } from "next/font/google";
-
-const staatliches = Staatliches({ subsets: ["latin"], weight: ["400"] });
 
 const CardLinksItems = () => {
   const pathname = usePathname();
@@ -25,7 +22,7 @@ const CardLinksItems = () => {
                 }  bg-slate-600 rounded-md shadow-xl hover:bg-slate-700 hover:scale-105 duration-500 transition-all`}
               >
                 <Link href={link.path} className="text-slate-200 ">
-                  <article className="relative p-2 sm:pl-3 sm:py-4 md:p-6 flex flex-col h-full text-neutral-200">
+                  <article className="relative flex flex-col py-4 pt-6 items-center justify-center text-neutral-200">
                     <Image
                       src={`/assets/images/${link.label}.webp`}
                       alt={link.title}
