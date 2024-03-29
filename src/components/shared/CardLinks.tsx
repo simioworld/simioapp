@@ -22,7 +22,7 @@ const CardLinksItems = () => {
                 }  bg-slate-600 rounded-md shadow-xl hover:bg-slate-700 hover:scale-105 duration-500 transition-all`}
               >
                 <Link href={link.path} className="text-slate-200 ">
-                  <article className="relative flex flex-col py-4 pt-6 items-center justify-center text-neutral-200">
+                  <article className="relative flex flex-col sm:py-4 sm:pt-6 pt-3 items-center justify-center text-neutral-200">
                     <Image
                       src={`/assets/images/${link.label}.webp`}
                       alt={link.title}
@@ -31,7 +31,7 @@ const CardLinksItems = () => {
                       className="opacity-10"
                     />
                     <h4
-                      className={`${staatliches.className} tracking-wide font-bold uppercase text-[clamp(14px,1.5vw,2rem)] text-neutral-300`}
+                      className={`${staatliches.className} tracking-wide font-bold uppercase text-[clamp(18px,1.5vw,2rem)] text-neutral-300`}
                     >
                       {link.title}
                     </h4>

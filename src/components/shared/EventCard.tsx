@@ -42,7 +42,7 @@ const EventCard = ({ event }: { event: EventStructure }) => {
 
   return (
     <Link href={`/dashboard/${event._id}`}>
-      <article className="text-neutral-200 flex flex-col  shadow-md rounded-lg  overflow-hidden hover:scale-105 duration-500 transition-all w-48 sm:w-52 md:w-56">
+      <article className="text-neutral-200 flex flex-col  shadow-md rounded-lg  overflow-hidden hover:scale-105 duration-500 transition-all w-full sm:w-52 md:w-56">
         <div>
           <Image
             src={`/assets/images/simulators/${event.simulator}.webp`}

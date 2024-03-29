@@ -10,13 +10,13 @@ const EventsPage = () => {
   if (!events) return [];
 
   return (
-    <section className="w-full pl-8 flex flex-col gap-2 ">
+    <section className="w-full xs:pl-8 flex flex-col items-center xs:items-start gap-2 ">
       <h2
-        className={`${staatliches.className} text-3xl text-slate-800/90 font-bold `}
+        className={`${staatliches.className} hidden xs:flex text-4xl xs:text-3xl text-slate-800/90 font-bold `}
       >
         Próximos eventos
       </h2>
-      <ul className="flex flex-wrap gap-3">
+      <ul className="flex flex-col items-center xs:flex-row xs:flex-wrap gap-4">
         {events.slice(0, 4).map((event) => {
           return (
             <li key={event.title} className="opacity-70">
