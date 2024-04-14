@@ -7,13 +7,13 @@ import Image from "next/image";
 import Link from "next/link";
 import { Id } from "../../../../../convex/_generated/dataModel";
 import { api } from "../../../../../convex/_generated/api";
-import { staatliches } from "@/constants";
-import { ArrowBigLeft, ArrowLeft } from "lucide-react";
+import { montserrat, staatliches } from "@/constants";
+import { ArrowLeft } from "lucide-react";
 
 const EventPage = () => {
   const { eventId } = useParams<{ eventId: Id<"events"> }>();
 
-  const event = useQuery(api.events.getEvent, { eventId });
+  const event = useQuery(api.event.getEvent, { eventId });
   const session = useSession();
 
   if (!event || !session) {
@@ -32,20 +32,25 @@ const EventPage = () => {
   const creationDate = new Date(event._creationTime);
 
   return (
-    <section className=" pl-12 pt-12  w-full flex flex-col  items-center justify-center   gap-10">
-      <div className="flex flex-col gap-2 sm:flex-row justify-center w-full ">
-        <div className="w-full flex justify-center ">
+    <section className="relative md:pl-2 w-full pr-2 flex flex-col  xs:items-center justify-center lg:justify-start gap-2 lg:gap-6">
+      <div className="flex flex-col lg:gap-8 lg:flex-row justify-center w-full min-w-[285px]  ">
+        <div className="w-full relative flex flex-col justify-center">
           <Image
             src={`/assets/images/simulators/${event.simulator}.webp`}
             alt={event.simulator}
-            width={300}
+            width={400}
             height={200}
             priority
-            className="w-full  shadow-lg rounded-lg"
-          />{" "}
+            className="w-full  shadow-lg rounded-t-lg"
+          />
+          <h2
+            className={`${staatliches.className}  text-xl text-center  text-orange-500/80 font-bold  rounded-b-md lg:px-8 xs:p-4 p-2 gap-4 w-full bg-transparent/30`}
+          >
+            {event.title}
+          </h2>
         </div>
-        <div className=" flex flex-col py-4 items-center justify-between w-full">
-          <div className="w-full flex gap-8 justify-center text-xs sm:text-base">
+        <div className=" flex flex-col py-1 xs:pt-4  justify-between w-full gap-1">
+          <div className="w-full flex  justify-between   text-xs sm:text-base">
             <div className="flex gap-1 justify-between ">
               <div className="flex flex-col gap-1">
                 <div className="flex gap-1 items-center">
@@ -84,7 +89,6 @@ const EventPage = () => {
                 </div>
               </div>
             </div>
-
             <div className="text-sm flex gap-0 items-center">
               <div className=" flex flex-col gap-0 sm:gap-1 ">
                 <div className=" flex items-center justify-end gap-1 ">
@@ -117,37 +121,41 @@ const EventPage = () => {
               </div>
             </div>
           </div>
-          <div className="flex items-center justify-center bg-slate-700 rounded-full px-4 py-2 gap-4">
+          <div className=" p-1 mt-3 w-full flex justify-between items-center rounded-full bg-transparent/30">
+            <Image
+              src={`/assets/images/communities/${event.community
+                .replaceAll(" ", "")
+                .toLowerCase()}.webp`}
+              alt={event.community}
+              width={16}
+              height={16}
+              priority
+              className="rounded-full shadow-lg h-6 w-6  "
+            />
+            <p className="text-base  z-20 font-italica  text-slate-300">
+              {event.community}
+            </p>{" "}
             <Link
-              className={` ${staatliches.className} flex items-center gap-2`}
+              className={` ${montserrat.className} flex items-center gap-2`}
               href={`${event.discordCommunity} `}
+              target="_blank"
             >
               <Image
                 src={"/assets/icons/discord.svg"}
                 alt={"discord"}
-                width={10}
-                height={10}
-                className="rounded-full p-1 bg-[#5865F2] h-4 w-4"
+                width={16}
+                height={16}
+                className="rounded-full p-1 bg-[#5865F2] h-6 w-6"
               />
-              <p className="text-sm  font-bold text-[#b6b8d2]  ">
-                {event.community}
-              </p>
             </Link>
           </div>
         </div>
       </div>
-      <div className="flex flex-col gap-2 items-center">
-        <h2
-          className={`${staatliches.className} w-full text-md text-center sm:text-2xl text-orange-500/90 font-bold`}
-        >
-          {event.title}
-        </h2>
-        <div className="flex flex-col bg-transparent/10 rounded-md px-8 py-4 pb-8 gap-4 w-3/4">
-          <div className=" bg-transparent w-full">
-            <p className=" text-sm text-pretty text-slate-300">
-              {event.description}
-            </p>
-          </div>
+      <div className="flex flex-col relative gap-2 items-center">
+        <div className="flex flex-col bg-transparent/30 rounded-md xs:px-8 xs:py-4 p-5 xs:pb-8 gap-4 w-full">
+          <p className=" text-sm text-pretty text-slate-300">
+            {event.description}
+          </p>
           <div className="flex items-center w-full justify-between gap-2  rounded-md">
             <div className="text-xs  text-slate-300">
               Creado por <span className="font-bold ">{event.userName}</span> el{" "}
@@ -155,12 +163,12 @@ const EventPage = () => {
             </div>
           </div>
         </div>
-        <div className="relative flex w-full">
-          <div className="absolute  text-slate-300 top-1/2 left-1/2 -translate-x-16 -translate-y-1/2">
-            <ArrowLeft className="" />
+        <div className="relative mt-2 flex w-full">
+          <div className="absolute text-slate-300 top-1/2 left-1/2 -translate-x-16 -translate-y-1/2">
+            <ArrowLeft className="rounded-full bg-transparent/30 p-1" />
           </div>
           <Link
-            className="text-center w-full  text-slate-300 z-20"
+            className="text-center w-full text-slate-300 z-20"
             href={`/dashboard`}
           >
             Volver

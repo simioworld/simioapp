@@ -17,7 +17,7 @@ export default function RootLayout({
   return (
     <html lang="es" suppressHydrationWarning>
       <body
-        className={`${montserrat.className} bg-gradient-to-b  from-neutral-400/40 to-neutral-100 min-h-screen`}
+        className={`${montserrat.className} select-none   bg-gradient-to-b  from-neutral-400/40 to-neutral-100 min-h-screen`}
       >
         <ClerkConvexProvider>
           <ThemeProvider
