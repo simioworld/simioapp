@@ -5,7 +5,6 @@ export default defineSchema(
   {
     events: defineTable({
       title: v.string(),
-
       eventType: v.union(
         v.literal("Campeonato"),
         v.literal("Carrera"),
@@ -38,9 +37,12 @@ export default defineSchema(
       price: v.optional(v.string()),
       community: v.string(),
       discordCommunity: v.string(),
-      userId: v.string(),
+      authorId: v.string(),
       userName: v.string(),
-    }).index("by_eventType", ["eventType"]),
+    })
+      .index("by_eventType", ["eventType"])
+      .index("by_simulator", ["simulator"])
+      .index("by_community", ["community"]),
 
     communities: defineTable({
       name: v.string(),
@@ -49,6 +51,7 @@ export default defineSchema(
       discordCommunity: v.string(),
     }),
     users: defineTable({
+      _id: v.id("users"),
       clerkId: v.string(),
       email: v.string(),
       username: v.optional(v.string()),
@@ -58,7 +61,14 @@ export default defineSchema(
     })
       .index("by_clerkId", ["clerkId"])
       .index("by_email", ["email"]),
+    userFavorites: defineTable({
+      userId: v.string(),
+      eventId: v.id("events"),
+    })
+      .index("by_event", ["eventId"])
+      .index("by_user_event", ["userId", "eventId"]),
   },
+
   {
     schemaValidation: false,
   }

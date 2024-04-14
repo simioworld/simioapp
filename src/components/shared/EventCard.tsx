@@ -1,9 +1,15 @@
+"use client";
+
 import Image from "next/image";
 import { Id } from "../../../convex/_generated/dataModel";
 import Link from "next/link";
 import { staatliches } from "@/constants";
+import { useAuth } from "@clerk/nextjs";
+import { useApiMutation } from "@/hooks/useApiMutation";
+import { api } from "../../../convex/_generated/api";
+import FavoriteButton from "./FavoriteButton";
 
-export interface EventStructure {
+export interface EventCardProps {
   _id: Id<"events">;
   title: string;
   eventType:
@@ -32,17 +38,33 @@ export interface EventStructure {
   slots: string;
   community: string;
   discordCommunity: string;
-  userId: string;
+  authorId: string;
   userName: string;
 }
 
-const EventCard = ({ event }: { event: EventStructure }) => {
+const EventCard = ({ event }: { event: EventCardProps }) => {
+  const { userId } = useAuth();
+
+  /*   const { mutate: onFavorite, pending: pendingFavorite } = useApiMutation(
+    api.event.favorite
+  );
+  const { mutate: onUnfavorite, pending: pendingUnfavorite } = useApiMutation(
+    api.event.unfavorite
+  );
+
+  const onToggleFavorite = () => {
+    if (event.isFavorite) {
+      onUnfavorite(event._id);
+    } else {
+      onFavorite(event._id);
+    }
+  }; */
   const month = event.startDate?.split("-")[1];
   const day = event.startDate?.split("-")[2];
 
   return (
     <Link href={`/dashboard/${event._id}`}>
-      <article className="text-neutral-200 flex flex-col  shadow-md rounded-lg  overflow-hidden hover:scale-105 duration-500 transition-all w-full sm:w-52 md:w-56">
+      <article className="text-neutral-200 flex flex-col  shadow-md rounded-lg  overflow-hidden hover:scale-105 duration-500 transition-all max-w-52 min-w-48">
         <div>
           <Image
             src={`/assets/images/simulators/${event.simulator}.webp`}
@@ -61,13 +83,11 @@ const EventCard = ({ event }: { event: EventStructure }) => {
               >
                 {event.eventType}
               </h2>
-              <Image
-                src="/assets/icons/heart.svg"
-                alt="corazon"
-                width={12}
-                height={12}
-                className="cursor-pointer"
-              />
+              {/*             <FavoriteButton
+              isFavorite={event.isFavorite}
+              onClick={() => {}}
+      
+            /> */}
             </div>
             <div className="flex gap-1 justify-between  ">
               <div className="flex gap-1 justify-between  ">
@@ -149,7 +169,6 @@ const EventCard = ({ event }: { event: EventStructure }) => {
               />
               <p className="text-xxs capitalize ">{event.community}</p>
             </div>
-            {/*   <div className="text-xxs">Creado por {event.userName}</div> */}
           </div>
         </div>
       </article>

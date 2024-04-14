@@ -1,30 +1,47 @@
 "use client";
 
-import { useQuery } from "convex/react";
-import EventCard from "@/components/shared/EventCard";
 import { staatliches } from "@/constants";
-import { api } from "../../../../convex/_generated/api";
 
-const EventsPage = () => {
-  const events = useQuery(api.events.getEvents);
-  if (!events) return [];
+import { Suspense } from "react";
+import Spinner from "@/components/shared/Spinner";
+import SearchBar from "@/components/shared/SearchBar";
+import EventList from "@/components/shared/EventList";
+
+const EventsPage = ({
+  searchParams,
+}: {
+  searchParams?: {
+    query?: string;
+    page?: string;
+    firstItem?: string;
+    itemsPerPage?: string;
+  };
+}) => {
+  const query = searchParams?.query || "";
+  const currentPage = Number(searchParams?.page) || 1;
+  const firstItem = Number(searchParams?.firstItem) || 0;
+  const itemsPerPage = Number(searchParams?.itemsPerPage) || 4;
 
   return (
-    <section className="w-full xs:pl-8 flex flex-col items-center xs:items-start gap-2 ">
+    <section className=" flex flex-col items-center w-full space-y-3 lg:space-y-5 lg:px-6">
       <h2
-        className={`${staatliches.className} hidden xs:flex text-4xl xs:text-3xl text-slate-800/90 font-bold `}
+        className={`${staatliches.className} z-20 hidden xs:flex  text-4xl xs:text-3xl text-slate-800/90 font-bold xs:justify-center   `}
       >
         Próximos eventos
       </h2>
-      <ul className="flex flex-col items-center xs:flex-row xs:flex-wrap gap-4">
-        {events.slice(0, 4).map((event) => {
-          return (
-            <li key={event.title} className="opacity-70">
-              <EventCard event={event} />
-            </li>
-          );
-        })}
-      </ul>
+      <div className="w-full flex items-center justify-center  lg:max-w-[420px] ">
+        <SearchBar placeholder={"Buscar evento..."} firstItem={firstItem} />
+      </div>
+      <div className="w-full">
+        <Suspense key={query + currentPage} fallback={<Spinner />}>
+          <EventList
+            query={query}
+            currentPage={currentPage}
+            firstItem={firstItem}
+            itemsPerPage={itemsPerPage}
+          />
+        </Suspense>
+      </div>
     </section>
   );
 };

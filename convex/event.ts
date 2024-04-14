@@ -36,6 +36,8 @@ export const createEvent = mutation({
     price: v.optional(v.string()),
     community: v.string(),
     discordCommunity: v.string(),
+    authorId: v.string(),
+    userName: v.string(),
   },
   handler: async (ctx, arg) => {
     const identity = await ctx.auth.getUserIdentity();
@@ -43,7 +45,6 @@ export const createEvent = mutation({
     if (!identity) {
       throw new Error("Usuario no autorizado");
     }
-    console.log(identity.name);
 
     const newEvent = await ctx.db.insert("events", {
       title: arg.title,
@@ -66,46 +67,6 @@ export const createEvent = mutation({
   },
 });
 
-// Return the last 100 tasks in a given task list.
-
-const itemsPerPage = 4;
-
-export const getEvents = query({
-  args: {
-    query: v.optional(v.string()),
-  },
-  handler: async (ctx, args) => {
-    const events = await ctx.db.query("events").collect();
-    return events;
-  },
-});
-
-export const getTotalPages = query({
-  args: {
-    query: v.optional(v.string()),
-    itemsPerPage: v.number(),
-  },
-  handler: async (ctx, args) => {
-    const events = await ctx.db.query("events").collect();
-    const totalPages = Math.ceil(events.length / itemsPerPage);
-    return totalPages;
-  },
-});
-
-export const getEventsForCarousel = query({
-  handler: async (ctx) => {
-    const eventsForCarousel = await ctx.db.query("events").take(6);
-    return eventsForCarousel;
-  },
-});
-
-export const getTwoEvents = query({
-  handler: async (ctx) => {
-    const events = await ctx.db.query("events").take(2);
-    return events;
-  },
-});
-
 export const getEvent = query({
   args: { eventId: v.id("events") },
   handler: async (ctx, { eventId }) => {
@@ -117,29 +78,73 @@ export const getEvent = query({
   },
 });
 
-export const getTypeEvents = query({
-  args: { eventType: v.string() },
-  handler: async (ctx, args) => {
-    const events = await ctx.db
-      .query("events")
-      .filter((q) => q.eq(q.field("eventType"), args.eventType))
-      .collect();
-    return events;
-  },
-});
-
-/* export const getPaginatedEvents = query({
+export const favorite = mutation({
   args: {
-    eventNumber: v.number(),
-    eventType: v.string(),
+    id: v.id("events"),
   },
-  handler: async (ctx, args) => {
-    const events = await ctx.db
-      .query("events")
-      .filter((q) => q.eq(q.field("eventType"), args.eventType))
-      .collect();
+  handler: async (ctx, arg) => {
+    const identity = await ctx.auth.getUserIdentity();
 
-    return events;
+    if (!identity) {
+      throw new Error("User not authorized");
+    }
+
+    const event = await ctx.db.get(arg.id);
+
+    if (!event) {
+      throw new Error("Event not found");
+    }
+
+    const userId = identity.subject;
+
+    const existingFavorite = await ctx.db
+      .query("userFavorites")
+      .withIndex("by_user_event", (q) =>
+        q.eq("userId", userId).eq("eventId", event._id)
+      )
+      .unique();
+
+    if (existingFavorite) {
+      throw new Error("Event already favorited");
+    }
+
+    await ctx.db.insert("userFavorites", {
+      userId,
+      eventId: event._id,
+    });
+
+    return event;
   },
 });
- */
+
+export const unfavorite = mutation({
+  args: { id: v.id("events") },
+  handler: async (ctx, arg) => {
+    const identity = await ctx.auth.getUserIdentity();
+    if (!identity) {
+      throw new Error("User not authorized");
+    }
+    const event = await ctx.db.get(arg.id);
+
+    if (!event) {
+      throw new Error("Event not found");
+    }
+
+    const userId = identity.subject;
+
+    const existingFavorite = await ctx.db
+      .query("userFavorites")
+      .withIndex("by_user_event", (q) =>
+        q.eq("userId", userId).eq("eventId", event._id)
+      )
+      .unique();
+
+    if (!existingFavorite) {
+      throw new Error("Favorited event not found");
+    }
+
+    await ctx.db.delete(existingFavorite._id);
+
+    return event;
+  },
+});

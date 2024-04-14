@@ -3,15 +3,11 @@ import { Montserrat, Staatliches } from "next/font/google";
 export const montserrat = Montserrat({
   subsets: ["latin"],
   weight: ["100", "200", "300", "400", "500", "600", "700"],
-  variable: "--font-montserrat",
-  display: "swap",
 });
 
 export const staatliches = Staatliches({
   subsets: ["latin"],
   weight: ["400"],
-  variable: "--font-staatliches",
-  display: "swap",
 });
 
 export const eventDefaultValues = {
@@ -85,7 +81,7 @@ export const dashboardNavLinks = [
     label: "communities",
     path: "/dashboard/communities",
     title: "Comunidades",
-    sublinks: ["foro", "buscador", "publicita"],
+    sublinks: ["foro", "buscador", "anuncia"],
   },
   {
     label: "recomendator",
