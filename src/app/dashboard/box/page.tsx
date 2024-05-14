@@ -2,7 +2,7 @@ import Box from "@/components/Box";
 
 const BoxPage = () => {
   return (
-    <div className="h-full w-full">
+    <div className="h-fit w-full">
       <Box />
     </div>
   );
