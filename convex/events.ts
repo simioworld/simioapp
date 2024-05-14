@@ -1,41 +1,29 @@
 import { v } from "convex/values";
 import { mutation, query } from "./_generated/server";
+import {
+  carCategoryUnionValues,
+  eventTypeUnionValues,
+  simulatorUnionValues,
+} from "./constants";
 
 export const createEvent = mutation({
   args: {
     title: v.string(),
-    eventType: v.union(
-      v.literal("Campeonato"),
-      v.literal("Carrera"),
-      v.literal("Entrenamiento"),
-      v.literal("Reto"),
-      v.literal("Resistencia")
-    ),
-    carCategory: v.union(
-      v.literal("GT2"),
-      v.literal("GT3"),
-      v.literal("GT4"),
-      v.literal("Porsche Cup"),
-      v.literal("Otra")
-    ),
+    eventType: eventTypeUnionValues,
+    carCategory: carCategoryUnionValues,
     location: v.string(),
-    simulator: v.union(
-      v.literal("ACC"),
-      v.literal("Assetto Corsa"),
-      v.literal("Automobilista 2"),
-      v.literal("GT7"),
-      v.literal("iRacing"),
-      v.literal("RaceRoom"),
-      v.literal("rFactor 2")
-    ),
+    simulator: simulatorUnionValues,
     description: v.string(),
     startDate: v.optional(v.string()),
     startTime: v.optional(v.string()),
     duration: v.string(),
     slots: v.string(),
     price: v.optional(v.string()),
-    community: v.string(),
+    communityName: v.string(),
+    communityId: v.id("communities"),
     discordCommunity: v.string(),
+    authorId: v.id("users"),
+    userName: v.string(),
   },
   handler: async (ctx, arg) => {
     const identity = await ctx.auth.getUserIdentity();
@@ -57,16 +45,15 @@ export const createEvent = mutation({
       duration: arg.duration,
       slots: arg.slots,
       price: arg.price,
-      community: arg.community,
+      communityName: arg.communityName,
+      communityId: arg.communityId,
       discordCommunity: arg.discordCommunity,
-      authorId: identity.subject,
+      authorId: arg.authorId,
       userName: identity.nickname!,
     });
     return newEvent;
   },
 });
-
-// Return the last 100 tasks in a given task list.
 
 const itemsPerPage = 4;
 
@@ -75,7 +62,10 @@ export const getEvents = query({
     query: v.optional(v.string()),
   },
   handler: async (ctx, args) => {
-    const events = await ctx.db.query("events").collect();
+    const events = await ctx.db
+      .query("events")
+
+      .collect();
     return events;
   },
 });
@@ -127,19 +117,3 @@ export const getTypeEvents = query({
     return events;
   },
 });
-
-/* export const getPaginatedEvents = query({
-  args: {
-    eventNumber: v.number(),
-    eventType: v.string(),
-  },
-  handler: async (ctx, args) => {
-    const events = await ctx.db
-      .query("events")
-      .filter((q) => q.eq(q.field("eventType"), args.eventType))
-      .collect();
-
-    return events;
-  },
-});
- */

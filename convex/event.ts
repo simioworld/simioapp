@@ -34,9 +34,10 @@ export const createEvent = mutation({
     duration: v.string(),
     slots: v.string(),
     price: v.optional(v.string()),
-    community: v.string(),
+    communityName: v.string(),
+    communityId: v.id("communities"),
     discordCommunity: v.string(),
-    authorId: v.string(),
+    authorId: v.id("users"),
     userName: v.string(),
   },
   handler: async (ctx, arg) => {
@@ -58,9 +59,10 @@ export const createEvent = mutation({
       duration: arg.duration,
       slots: arg.slots,
       price: arg.price,
-      community: arg.community,
+      communityName: arg.communityName,
+      communityId: arg.communityId,
       discordCommunity: arg.discordCommunity,
-      authorId: identity.subject,
+      authorId: arg.authorId,
       userName: identity.nickname!,
     });
     return newEvent;
@@ -74,77 +76,6 @@ export const getEvent = query({
     if (!event) {
       return null;
     }
-    return event;
-  },
-});
-
-export const favorite = mutation({
-  args: {
-    id: v.id("events"),
-  },
-  handler: async (ctx, arg) => {
-    const identity = await ctx.auth.getUserIdentity();
-
-    if (!identity) {
-      throw new Error("User not authorized");
-    }
-
-    const event = await ctx.db.get(arg.id);
-
-    if (!event) {
-      throw new Error("Event not found");
-    }
-
-    const userId = identity.subject;
-
-    const existingFavorite = await ctx.db
-      .query("userFavorites")
-      .withIndex("by_user_event", (q) =>
-        q.eq("userId", userId).eq("eventId", event._id)
-      )
-      .unique();
-
-    if (existingFavorite) {
-      throw new Error("Event already favorited");
-    }
-
-    await ctx.db.insert("userFavorites", {
-      userId,
-      eventId: event._id,
-    });
-
-    return event;
-  },
-});
-
-export const unfavorite = mutation({
-  args: { id: v.id("events") },
-  handler: async (ctx, arg) => {
-    const identity = await ctx.auth.getUserIdentity();
-    if (!identity) {
-      throw new Error("User not authorized");
-    }
-    const event = await ctx.db.get(arg.id);
-
-    if (!event) {
-      throw new Error("Event not found");
-    }
-
-    const userId = identity.subject;
-
-    const existingFavorite = await ctx.db
-      .query("userFavorites")
-      .withIndex("by_user_event", (q) =>
-        q.eq("userId", userId).eq("eventId", event._id)
-      )
-      .unique();
-
-    if (!existingFavorite) {
-      throw new Error("Favorited event not found");
-    }
-
-    await ctx.db.delete(existingFavorite._id);
-
     return event;
   },
 });
