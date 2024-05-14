@@ -1,55 +1,55 @@
 import { defineSchema, defineTable } from "convex/server";
 import { v } from "convex/values";
+import {
+  carCategoryUnionValues,
+  eventTypeUnionValues,
+  simulatorUnionValues,
+} from "./constants";
 
 export default defineSchema(
   {
     events: defineTable({
       title: v.string(),
-      eventType: v.union(
-        v.literal("Campeonato"),
-        v.literal("Carrera"),
-        v.literal("Entrenamiento"),
-        v.literal("Reto"),
-        v.literal("Resistencia")
-      ),
-      carCategory: v.union(
-        v.literal("GT2"),
-        v.literal("GT3"),
-        v.literal("GT4"),
-        v.literal("Porsche Cup"),
-        v.literal("Otra")
-      ),
+      eventType: eventTypeUnionValues,
+      carCategory: carCategoryUnionValues,
       location: v.string(),
-      simulator: v.union(
-        v.literal("ACC"),
-        v.literal("Assetto Corsa"),
-        v.literal("Automobilista 2"),
-        v.literal("GT7"),
-        v.literal("iRacing"),
-        v.literal("RaceRoom"),
-        v.literal("rFactor 2")
-      ),
+      simulator: simulatorUnionValues,
       description: v.string(),
       startDate: v.optional(v.string()),
       startTime: v.optional(v.string()),
       duration: v.string(),
       slots: v.string(),
       price: v.optional(v.string()),
-      community: v.string(),
+      communityName: v.string(),
+      communityId: v.id("communities"),
       discordCommunity: v.string(),
-      authorId: v.string(),
+      authorId: v.id("users"),
       userName: v.string(),
     })
       .index("by_eventType", ["eventType"])
       .index("by_simulator", ["simulator"])
-      .index("by_community", ["community"]),
+      .index("by_communityId", ["communityId"]),
 
     communities: defineTable({
       name: v.string(),
       description: v.optional(v.string()),
       admins: v.optional(v.string()),
       discordCommunity: v.string(),
-    }),
+
+      logo: v.optional(v.string()),
+      web: v.optional(v.string()),
+      twitch: v.optional(v.string()),
+      twitter: v.optional(v.string()),
+      youtube: v.optional(v.string()),
+      instagram: v.optional(v.string()),
+      facebook: v.optional(v.string()),
+      simulators: v.optional(v.array(v.string())),
+    }).index("by_communityName", ["name"]),
+    communityEvents: defineTable({
+      communityId: v.id("communities"),
+      eventId: v.id("events"),
+    }).index("by_community_event", ["communityId", "eventId"]),
+
     users: defineTable({
       _id: v.id("users"),
       clerkId: v.string(),
@@ -62,7 +62,7 @@ export default defineSchema(
       .index("by_clerkId", ["clerkId"])
       .index("by_email", ["email"]),
     userFavorites: defineTable({
-      userId: v.string(),
+      userId: v.id("users"),
       eventId: v.id("events"),
     })
       .index("by_event", ["eventId"])
