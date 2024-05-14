@@ -1,11 +1,12 @@
-import Communities from "@/components/Communities";
-import React from "react";
+import Spinner from "@/components/shared/Spinner";
+import CommunityList from "@/components/shared/communities/CommunityList";
+import { Suspense } from "react";
 
 const CommunitiesPage = () => {
   return (
-    <div className="h-full w-full ">
-      <Communities />
-    </div>
+    <Suspense fallback={<Spinner />}>
+      <CommunityList query="" />
+    </Suspense>
   );
 };
 
