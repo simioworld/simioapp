@@ -1,3 +1,4 @@
+import { simulators } from "@/constants";
 import * as z from "zod";
 
 export const userSchema = z.object({
@@ -8,13 +9,15 @@ export const userSchema = z.object({
   lastName: z.string().min(3).max(50).optional(),
   photo: z.string().optional(),
 });
+export const searchFormSchema = z.object({
+  query: z.string(),
+});
 
 export const eventFormSchema = z.object({
   title: z.string().min(5).max(50),
   eventType: z.union([
     z.literal("Campeonato"),
     z.literal("Carrera"),
-    z.literal("Entrenamiento"),
     z.literal("Reto"),
     z.literal("Resistencia"),
   ]),
@@ -30,10 +33,10 @@ export const eventFormSchema = z.object({
     z.literal("ACC"),
     z.literal("Assetto Corsa"),
     z.literal("Automobilista 2"),
-
-    z.literal("GT7"),
+    z.literal("Dirt Rally 2"),
+    z.literal("F1 23"),
+    z.literal("Gran Turismo 7"),
     z.literal("iRacing"),
-
     z.literal("RaceRoom"),
     z.literal("rFactor 2"),
   ]),
@@ -43,13 +46,6 @@ export const eventFormSchema = z.object({
   duration: z.string().min(1).max(3),
   slots: z.string().min(1).max(50),
   price: z.optional(z.string().min(1)),
-  community: z.string().min(2).max(50),
+  communityName: z.string().min(2).max(50),
   discordCommunity: z.string(),
-  /*
-    isFree: z.boolean(),
-
-
- 
-
- */
 });
