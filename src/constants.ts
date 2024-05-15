@@ -1,3 +1,4 @@
+import { v } from "convex/values";
 import { Montserrat, Staatliches } from "next/font/google";
 
 export const montserrat = Montserrat({
@@ -9,35 +10,21 @@ export const staatliches = Staatliches({
   subsets: ["latin"],
   weight: ["400"],
 });
-
 export const eventDefaultValues = {
-  title: "",
-  eventType: "",
-  carCategory: "",
-  slots: "",
-  isFree: true,
-  price: "",
-  date: "",
+  title: "Pachanga con amigos",
+  eventType: "Carrera",
+  carCategory: "GT2",
+  location: "Barcelona",
+  simulator: "ACC",
+  startDate: "01/01/2028",
+  startTime: "12:00",
+  duration: "60",
   description: "",
-  location: "",
-  simulator: "",
-  createdAt: new Date(),
-};
-
-export const headerNavItems = [
-  {
-    label: "Inicio",
-    path: "/",
-  },
-  {
-    label: "Eventos",
-    path: "/events",
-  },
-  {
-    label: "Crear",
-    path: "/events/create-event",
-  },
-];
+  slots: "20",
+  price: "0",
+  communityName: "Simracers",
+  discordCommunity: "discord.to/Simracers",
+} as const;
 
 export const months: { [key: number]: string } = {
   1: "Enero",
@@ -54,29 +41,71 @@ export const months: { [key: number]: string } = {
   12: "Diciembre",
 };
 
+export const simulators = [
+  "ACC",
+  "Assetto Corsa",
+  "Automobilista 2",
+  "Dirt Rally 2",
+  "F1 23",
+  "Gran Turismo 7",
+  "iRacing",
+  "RaceRoom",
+  "rFactor 2",
+];
+
 export const eventsNavLinks = [
   {
     label: "championships",
-    path: "/dashboard/championships",
+    path: "/dashboard/events/championships",
     title: "campeonatos",
   },
   {
     label: "races",
-    path: "/dashboard/races",
+    path: "/dashboard/events/races",
     title: "carreras",
   },
   {
     label: "challenges",
-    path: "/dashboard/challenges",
+    path: "/dashboard/events/challenges",
     title: "retos",
   },
   {
     label: "endurances",
-    path: "/dashboard/endurances",
+    path: "/dashboard/events/endurances",
     title: "resistencias",
   },
 ];
+
+export const communitiesNavLinks = [
+  {
+    label: "championships",
+    path: "/dashboard/events/championships",
+    title: "campeonatos",
+  },
+  {
+    label: "races",
+    path: "/dashboard/events/races",
+    title: "carreras",
+  },
+  {
+    label: "challenges",
+    path: "/dashboard/events/challenges",
+    title: "retos",
+  },
+  {
+    label: "endurances",
+    path: "/dashboard/events/endurances",
+    title: "resistencias",
+  },
+];
+
 export const dashboardNavLinks = [
+  {
+    label: "events",
+    path: "/dashboard/events",
+    title: "Eventos",
+    sublinks: ["carreras", "campeonatos", "resistencias", "retos"],
+  },
   {
     label: "communities",
     path: "/dashboard/communities",
@@ -103,3 +132,11 @@ export const dashboardNavLinks = [
     subtitle: "¿Buscas equipo, piloto, rival?",
   },
 ];
+
+export const imageBackgroundStyle = {
+  objectFit: "cover",
+  objectPosition: "bottom",
+} as React.CSSProperties;
+
+export const imageBackgroundSize =
+  "(max-width: 768px) 90vw, (max-width: 1200px) 70vw, 60vw" as string;
