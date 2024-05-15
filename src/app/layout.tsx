@@ -15,8 +15,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="es" suppressHydrationWarning>
+    <html lang="es">
       <body
+        suppressHydrationWarning={true}
         className={`${montserrat.className} select-none   bg-gradient-to-b  from-neutral-400/40 to-neutral-100 min-h-screen`}
       >
         <ClerkConvexProvider>
