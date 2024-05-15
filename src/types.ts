@@ -21,3 +21,23 @@ export interface UserStructure {
   lastName?: string;
   photo?: string;
 }
+
+export interface CommunityStructure {
+  discordCommunity?: string;
+  web?: string;
+  instagram?: string;
+  twitter?: string;
+  twitch?: string;
+  facebook?: string;
+  youtube?: string;
+  name: string;
+  description?: string;
+  admins?: string;
+  logo?: string;
+  simulators?: string[];
+}
+
+export type CommunitySocialStructure = Omit<
+  CommunityStructure,
+  "logo" | "simulators" | "name" | "description" | "admins"
+>;
