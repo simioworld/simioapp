@@ -5,7 +5,9 @@ import { useQuery } from "convex/react";
 import { Staatliches, Montserrat } from "next/font/google";
 import Image from "next/image";
 import { api } from "../../convex/_generated/api";
-import EventCard, { EventCardProps } from "@/components/shared/EventCard";
+import EventCard, {
+  EventCardProps,
+} from "@/components/shared/events/EventCard";
 import CarouselCard from "@/components/shared/CarouselCard";
 import Link from "next/link";
 
@@ -58,7 +60,7 @@ export default function Home() {
           </div>
         </div>
         <div className="rounded-full absolute right-6 bottom-6 ">
-          <Link href="/dashboard">
+          <Link href="/dashboard/events">
             <Button
               className="relative z-10 rounded-full text-sm sm:text-xl  shadow-lg hover:scale-110  hover:bg-red-800/90 hover:opacity-90  bg-clip-text hover:bg-clip-border hover:text-red-800 hover:from-slate-300 hover:to-slate-300
              transition-all duration-500 cursor-pointer text-center text-transparent bg-gradient-to-r from-red-400  to-red-500 py-1 sm:py-5 px-4 sm:px-8 sm:h-10  "
