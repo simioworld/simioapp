@@ -41,10 +41,12 @@ import { Id } from "../../../../convex/_generated/dataModel";
 import { useUser } from "@clerk/nextjs";
 
 interface EventFormProps {
+  userId: string;
   type: "Crear" | "Editar";
 }
 const EventForm = ({ type }: EventFormProps) => {
   const router = useRouter();
+  const { isSignedIn, user } = useUser();
 
   const form = useForm<z.infer<typeof eventFormSchema>>({
     resolver: zodResolver(eventFormSchema),
@@ -52,16 +54,15 @@ const EventForm = ({ type }: EventFormProps) => {
   });
 
   const createEvent = useMutation(api.events.createEvent);
-  const onSubmit = async (values: z.infer<typeof eventFormSchema>) => {
+  const SubmitHandler = async (values: z.infer<typeof eventFormSchema>) => {
+    const communityId = useQuery(api.community.getCommunityId, {
+      communityName: values.communityName,
+    });
     if (type === "Crear") {
       try {
-        const { isSignedIn, user } = useUser();
         if (!isSignedIn)
           throw new Error("Para crear un evento hay que estar autenticado");
         if (!user) throw new Error("No hay usuario autenticado");
-        const communityId = useQuery(api.community.getCommunityId, {
-          communityName: values.communityName,
-        });
 
         if (!communityId) throw new Error("No se encontro la comunidad");
 
@@ -99,7 +100,7 @@ const EventForm = ({ type }: EventFormProps) => {
     <article className="p-2 overflow-hidden flex flex-col place-items-center w-full sm:min-w-3/5    z-20 text-slate-100/80">
       <Form {...form}>
         <form
-          onSubmit={form.handleSubmit(onSubmit)}
+          onSubmit={form.handleSubmit(SubmitHandler)}
           className="flex flex-col gap-5 w-full px-4"
         >
           <div className="flex flex-col gap-2">
