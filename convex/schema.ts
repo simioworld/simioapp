@@ -9,6 +9,7 @@ import {
 export default defineSchema(
   {
     events: defineTable({
+      _id: v.id("events"),
       title: v.string(),
       eventType: eventTypeUnionValues,
       carCategory: carCategoryUnionValues,
