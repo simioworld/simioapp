@@ -10,21 +10,23 @@ interface pendingWordProps {
   value: string;
 }
 
-const pendingWords = [
-  { Crear: "Creando" },
-  { Editar: "Editando" },
-  { Eliminar: "Eliminando" },
-  { Enviar: "Enviando" },
-] as pendingWordProps[];
+const pendingWords: pendingWordProps[] = [
+  { key: "Crear", value: "Creando" },
+  { key: "Editar", value: "Editando" },
+  { key: "Eliminar", value: "Eliminando" },
+  { key: "Enviar", value: "Enviando" },
+];
 
 const SubmitButton = ({ className, eventType }: SubmitButtonProps) => {
   const { pending } = useFormStatus();
 
-  const pendingWord = pendingWords.find((word) => word[eventType] as string);
+  const pendingWord = pendingWords.find(
+    (word) => word.key === eventType
+  )?.value;
 
   return (
     <button type="submit" className={className} aria-disabled={pending}>
-      {pending ? "Enviando..." : "Enviar"} {eventType} evento
+      {pending ? `${pendingWord}...` : eventType} evento
     </button>
   );
 };
