@@ -1,18 +1,3 @@
-export interface FormDataStructure {
-  title: string;
-  eventType: "Campeonato" | "Carrera" | "Entrenamiento";
-  createdBy: Pick<UserStructure, "clerkId">;
-
-  carCategory: string;
-  slots: string;
-  isFree: boolean;
-  date: string;
-  description: string;
-  location: string;
-  simulator: string /*
-  createdAt: string; */;
-}
-
 export interface UserStructure {
   clerkId: string;
   email: string;
@@ -41,3 +26,19 @@ export type CommunitySocialStructure = Omit<
   CommunityStructure,
   "logo" | "simulators" | "name" | "description" | "admins"
 >;
+
+export type CarCategories = "GT2" | "GT3" | "GT4" | "Porsche Cup" | "Otra";
+
+export type EventTypes = "Campeonato" | "Carrera" | "Resistencia" | "Reto";
+
+export type Simulators =
+  | "ACC"
+  | "Assetto Corsa"
+  | "Automobilista 2"
+  | "Dirt Rally 2"
+  | "F1 23"
+  | "Gran Turismo 7"
+  | "iRacing"
+  | "RaceRoom"
+  | "rFactor 2"
+  | "Otro";
