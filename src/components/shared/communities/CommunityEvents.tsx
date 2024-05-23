@@ -17,8 +17,8 @@ const CommunityEvents = ({ communityId }: CommunityEventsProps) => {
   return (
     <ul className="flex flex-wrap justify-center w-full gap-2">
       {communityEvents?.map((communityEvent) => (
-        <li>
-          <EventCard key={communityEvent._id} event={communityEvent} />
+        <li key={communityEvent._id}>
+          <EventCard event={communityEvent} />
         </li>
       ))}
     </ul>
