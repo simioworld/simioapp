@@ -1,18 +1,18 @@
 import { v } from "convex/values";
 import { mutation, query } from "./_generated/server";
 import {
-  carCategoryUnionValues,
-  eventTypeUnionValues,
-  simulatorUnionValues,
+  carCategoryValues,
+  eventTypeValues,
+  simulatorValues,
 } from "./constants";
 
 export const createEvent = mutation({
   args: {
     title: v.string(),
-    eventType: eventTypeUnionValues,
-    carCategory: carCategoryUnionValues,
+    eventType: eventTypeValues,
+    carCategory: carCategoryValues,
     location: v.string(),
-    simulator: simulatorUnionValues,
+    simulator: simulatorValues,
     description: v.string(),
     startDate: v.optional(v.string()),
     startTime: v.optional(v.string()),
