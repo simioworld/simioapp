@@ -7,34 +7,21 @@ import { staatliches } from "@/constants";
 import Location from "./Location";
 import Car from "./Car";
 import Person from "./Person";
+import { CarCategories, EventTypes, Simulators } from "@/types";
 
 export interface EventCardProps {
   _id: Id<"events">;
   title: string;
-  eventType:
-    | "Campeonato"
-    | "Carrera"
-    | "Entrenamiento"
-    | "Reto"
-    | "Resistencia";
-  carCategory: "GT2" | "GT3" | "GT4" | "Porsche Cup" | "Otra";
+  eventType: EventTypes;
+  carCategory: CarCategories;
   location: string;
-  simulator:
-    | "ACC"
-    | "Assetto Corsa"
-    | "Automobilista 2"
-    | "F1"
-    | "GT7"
-    | "iRacing"
-    | "Project Cars 2"
-    | "RaceRoom"
-    | "rFactor 2"
-    | "Otro";
+  simulator: Simulators;
   description: string;
   startDate?: string;
   startTime?: string;
   duration: string;
   slots: string;
+  price?: string;
   communityName: string;
   communityId: string;
   discordCommunity: string;
