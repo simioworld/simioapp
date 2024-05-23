@@ -17,7 +17,9 @@ const EventLayout = ({ children }: { children: React.ReactNode }) => {
     <section className="overflow-hidden  h-full relative flex flex-col items-center w-full   ">
       <ImageBackground route={pathname} />
       <div className="flex flex-row justify-start w-full ">
-        <SubHeader title="Eventos" path={pathname} children={<NavEvents />} />
+        <SubHeader title="Eventos" path={pathname}>
+          <NavEvents />
+        </SubHeader>
         <div className="relative">
           <Hint
             label={"Crear evento"}

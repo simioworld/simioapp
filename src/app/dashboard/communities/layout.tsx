@@ -12,11 +12,9 @@ const CommunitiesLayout = ({ children }: { children: React.ReactNode }) => {
   return (
     <section className="overflow-hidden  h-full relative flex flex-col items-center w-full   ">
       <ImageBackground route={pathname} />
-      <SubHeader
-        title="Comunidades"
-        path={pathname}
-        children={<NavCommunities />}
-      />
+      <SubHeader title="Comunidades" path={pathname}>
+        <NavCommunities />
+      </SubHeader>
 
       <div className="flex flex-col px-4 sm:flex-row items-center  pt-10 pb-4 w-full ">
         {children}
