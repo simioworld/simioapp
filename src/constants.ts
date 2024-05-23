@@ -53,6 +53,8 @@ export const simulators = [
   "rFactor 2",
 ];
 
+export const carCategory = ["GT2", "GT3", "GT4", "Porsche Cup", "Otra"];
+
 export const eventsNavLinks = [
   {
     label: "championships",

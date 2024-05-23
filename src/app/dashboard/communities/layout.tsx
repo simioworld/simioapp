@@ -8,15 +8,13 @@ import React from "react";
 
 const CommunitiesLayout = ({ children }: { children: React.ReactNode }) => {
   const pathname = usePathname();
-  const route = pathname.split("/").at(-1);
-  if (!route) return null;
 
   return (
     <section className="overflow-hidden  h-full relative flex flex-col items-center w-full   ">
-      <ImageBackground route={route} />
+      <ImageBackground route={pathname} />
       <SubHeader
         title="Comunidades"
-        path={route}
+        path={pathname}
         children={<NavCommunities />}
       />
 

@@ -23,7 +23,6 @@ export const carCategoryUnionValues = v.union(
 export const eventTypeUnionValues = v.union(
   v.literal("Campeonato"),
   v.literal("Carrera"),
-  v.literal("Entrenamiento"),
   v.literal("Reto"),
   v.literal("Resistencia")
 );

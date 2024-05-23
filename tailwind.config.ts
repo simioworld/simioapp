@@ -27,7 +27,7 @@ const config = {
         "2xl": "1536px",
       },
       gridTemplateColumns: {
-        "auto-fit-250": "repeat(auto-fit, 250px)",
+        "auto-fit": "repeat(auto-fit, 1fr)",
       },
       fontSize: {
         xxs: "0.625rem",

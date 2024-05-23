@@ -10,14 +10,14 @@ import React from "react";
 
 const EventLayout = ({ children }: { children: React.ReactNode }) => {
   const pathname = usePathname();
-  const route = pathname.split("/").at(-1);
+  const route = pathname.split("/");
   if (!route) return null;
-
+  console.log(route);
   return (
     <section className="overflow-hidden  h-full relative flex flex-col items-center w-full   ">
-      <ImageBackground route={route} />
+      <ImageBackground route={pathname} />
       <div className="flex flex-row justify-start w-full ">
-        <SubHeader title="Eventos" path={route} children={<NavEvents />} />
+        <SubHeader title="Eventos" path={pathname} children={<NavEvents />} />
         <div className="relative">
           <Hint
             label={"Crear evento"}

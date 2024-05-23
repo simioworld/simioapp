@@ -10,14 +10,18 @@ import {
 } from "@/components/ui/carousel";
 import { useQuery } from "convex/react";
 import { api } from "../../../convex/_generated/api";
-import EventCard from "./EventCard";
+import EventCard from "./events/EventCard";
 
 const CarouselCard = () => {
   const plugin = React.useRef(
     Autoplay({ delay: 2000, stopOnInteraction: true })
   );
   const events = useQuery(api.events.getEventsForCarousel);
-
+  const eventsOdds = events?.map((event, index) => {
+    if (index % 2 === 0) {
+      return event;
+    }
+  });
   return (
     <Carousel
       plugins={[plugin.current]}

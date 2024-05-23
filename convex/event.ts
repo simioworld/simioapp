@@ -7,7 +7,6 @@ export const createEvent = mutation({
     eventType: v.union(
       v.literal("Campeonato"),
       v.literal("Carrera"),
-      v.literal("Entrenamiento"),
       v.literal("Reto"),
       v.literal("Resistencia")
     ),
@@ -23,7 +22,9 @@ export const createEvent = mutation({
       v.literal("ACC"),
       v.literal("Assetto Corsa"),
       v.literal("Automobilista 2"),
-      v.literal("GT7"),
+      v.literal("Dirt Rally 2"),
+      v.literal("F1 23"),
+      v.literal("Gran Turismo 7"),
       v.literal("iRacing"),
       v.literal("RaceRoom"),
       v.literal("rFactor 2")
