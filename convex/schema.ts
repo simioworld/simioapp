@@ -1,9 +1,9 @@
 import { defineSchema, defineTable } from "convex/server";
 import { v } from "convex/values";
 import {
-  carCategoryUnionValues,
-  eventTypeUnionValues,
-  simulatorUnionValues,
+  carCategoryValues,
+  eventTypeValues,
+  simulatorValues,
 } from "./constants";
 
 export default defineSchema(
@@ -11,10 +11,10 @@ export default defineSchema(
     events: defineTable({
       _id: v.id("events"),
       title: v.string(),
-      eventType: eventTypeUnionValues,
-      carCategory: carCategoryUnionValues,
+      eventType: eventTypeValues,
+      carCategory: carCategoryValues,
       location: v.string(),
-      simulator: simulatorUnionValues,
+      simulator: simulatorValues,
       description: v.string(),
       startDate: v.optional(v.string()),
       startTime: v.optional(v.string()),
