@@ -1,6 +1,6 @@
 import { v } from "convex/values";
 
-export const simulatorUnionValues = v.union(
+export const simulatorValues = v.union(
   v.literal("ACC"),
   v.literal("Assetto Corsa"),
   v.literal("Automobilista 2"),
@@ -12,7 +12,7 @@ export const simulatorUnionValues = v.union(
   v.literal("rFactor 2")
 );
 
-export const carCategoryUnionValues = v.union(
+export const carCategoryValues = v.union(
   v.literal("GT2"),
   v.literal("GT3"),
   v.literal("GT4"),
@@ -20,7 +20,7 @@ export const carCategoryUnionValues = v.union(
   v.literal("Otra")
 );
 
-export const eventTypeUnionValues = v.union(
+export const eventTypeValues = v.union(
   v.literal("Campeonato"),
   v.literal("Carrera"),
   v.literal("Reto"),
