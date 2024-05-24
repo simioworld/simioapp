@@ -30,7 +30,7 @@ export const eventFormSchema = z.object({
   ]),
   location: z.string().min(5).max(50),
   simulator: z.union([
-    z.literal("ACC"),
+    z.literal("Assetto Corsa Competizione"),
     z.literal("Assetto Corsa"),
     z.literal("Automobilista 2"),
     z.literal("Dirt Rally 2"),

@@ -24,7 +24,7 @@ const Hint = ({
   align = "start",
   sideOffset = 4,
   alignOffset = 4,
-  simulators = ["ACC"],
+  simulators = ["Assetto Corsa Competizione"],
 }: HintProps) => {
   return (
     <TooltipProvider>

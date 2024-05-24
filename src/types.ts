@@ -32,7 +32,7 @@ export type CarCategories = "GT2" | "GT3" | "GT4" | "Porsche Cup" | "Otra";
 export type EventTypes = "Campeonato" | "Carrera" | "Resistencia" | "Reto";
 
 export type Simulators =
-  | "ACC"
+  | "Assetto Corsa Competizione"
   | "Assetto Corsa"
   | "Automobilista 2"
   | "Dirt Rally 2"

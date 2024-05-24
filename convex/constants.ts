@@ -1,7 +1,7 @@
 import { v } from "convex/values";
 
 export const simulatorValues = v.union(
-  v.literal("ACC"),
+  v.literal("Assetto Corsa Competizione"),
   v.literal("Assetto Corsa"),
   v.literal("Automobilista 2"),
   v.literal("Dirt Rally 2"),

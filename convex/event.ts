@@ -19,7 +19,7 @@ export const createEvent = mutation({
     ),
     location: v.string(),
     simulator: v.union(
-      v.literal("ACC"),
+      v.literal("Assetto Corsa Competizione"),
       v.literal("Assetto Corsa"),
       v.literal("Automobilista 2"),
       v.literal("Dirt Rally 2"),

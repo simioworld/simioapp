@@ -1,4 +1,3 @@
-import { v } from "convex/values";
 import { Montserrat, Staatliches } from "next/font/google";
 
 export const montserrat = Montserrat({
@@ -15,7 +14,7 @@ export const eventDefaultValues = {
   eventType: "Carrera",
   carCategory: "GT2",
   location: "Barcelona",
-  simulator: "ACC",
+  simulator: "Assetto Corsa Competizione",
   startDate: "01/01/2028",
   startTime: "12:00",
   duration: "60",
@@ -42,7 +41,7 @@ export const months: { [key: number]: string } = {
 };
 
 export const simulators = [
-  "ACC",
+  "Assetto Corsa Competizione",
   "Assetto Corsa",
   "Automobilista 2",
   "Dirt Rally 2",
