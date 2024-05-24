@@ -35,12 +35,14 @@ const EventPage = () => {
 
   const creationDate = new Date(event._creationTime);
 
+  const simulatorNormalized = event.simulator.replace(/\s/g, "").toLowerCase();
+
   return (
     <section className="relative md:pl-2 w-full pr-2 flex flex-col  xs:items-center justify-center lg:justify-start gap-2 sm:gap-6">
       <div className="flex flex-col  sm:flex-row  sm:gap-4 justify-center sm:items-start w-full min-w-[285px]  ">
         <div className="w-full relative flex flex-col justify-center">
           <Image
-            src={`/assets/images/simulators/${event.simulator}.webp`}
+            src={`/assets/images/simulators/${simulatorNormalized}.webp`}
             alt={event.simulator}
             width={400}
             height={200}
