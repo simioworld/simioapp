@@ -32,13 +32,13 @@ export interface EventCardProps {
 const EventCard = ({ event }: { event: EventCardProps }) => {
   const month = event.startDate?.split("-")[1];
   const day = event.startDate?.split("-")[2];
-
+  const simulatorNormalized = event.simulator.replace(/\s/g, "").toLowerCase();
   return (
     <Link href={`/dashboard/events/${event._id}`}>
       <article className="text-neutral-200 flex flex-col  shadow-md rounded-lg  overflow-hidden hover:scale-105 duration-500 transition-all max-w-52 min-w-48">
         <div>
           <Image
-            src={`/assets/images/simulators/${event.simulator}.webp`}
+            src={`/assets/images/simulators/${simulatorNormalized}.webp`}
             alt={`foto de ${event.simulator}`}
             width={200}
             height={200}
