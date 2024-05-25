@@ -12,7 +12,6 @@ const CommunityEvents = ({ communityId }: CommunityEventsProps) => {
   const communityEvents = useQuery(api.community.getCommunityEvents, {
     communityId,
   });
-  console.log(communityEvents);
   if (!communityEvents) return <Loading />;
   return (
     <ul className="flex flex-wrap justify-center w-full gap-2">

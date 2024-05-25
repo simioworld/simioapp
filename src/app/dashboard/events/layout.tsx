@@ -10,9 +10,7 @@ import React from "react";
 
 const EventLayout = ({ children }: { children: React.ReactNode }) => {
   const pathname = usePathname();
-  const route = pathname.split("/");
-  if (!route) return null;
-  console.log(route);
+
   return (
     <section className="overflow-hidden  h-full relative flex flex-col items-center w-full   ">
       <ImageBackground route={pathname} />

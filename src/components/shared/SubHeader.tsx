@@ -8,10 +8,8 @@ interface NavEventsProps {
   path?: string;
 }
 const SubHeader = ({ children, title, path }: NavEventsProps) => {
-  console.log(path);
   if (!path) return null;
   const splitedPath = path?.split("/").at(2);
-  console.log(splitedPath);
   return (
     <header className="relative px-4 py-2 w-full flex flex-row gap-4 items-center justify-between shadow-md  opacity-80">
       <div className="flex flex-row gap-4 items-center">

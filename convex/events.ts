@@ -31,7 +31,6 @@ export const createEvent = mutation({
     if (!identity) {
       throw new Error("Usuario no autorizado");
     }
-    console.log(identity.name);
 
     const newEvent = await ctx.db.insert("events", {
       title: arg.title,
