@@ -18,7 +18,7 @@ const NavEvents = () => {
           return (
             <li
               className={cn(
-                `w-full group bg-slate-800 rounded-md p-1 px-3 hover:scale-105 transition-all duration-500`,
+                `w-full group bg-slate-800 rounded-md p-1 px-2 hover:scale-105 transition-all duration-500`,
                 isActive && "outline  outline-orange-500 "
               )}
               key={link.label}
@@ -29,20 +29,20 @@ const NavEvents = () => {
                 side={"bottom"}
                 sideOffset={16}
                 alignOffset={0}
-                className="lg:hidden"
+                className="md:hidden"
               >
                 <div className="relative">
                   <Link
                     href={link.path}
-                    className="w-full flex items-center justify-center p-1  gap-1 "
+                    className="w-full flex items-center justify-center gap-1 py-[2px] md:px-2 "
                   >
                     <Image
                       src={`/assets/icons/${link.label}.svg`}
                       alt={link.title}
-                      width={18}
-                      height={18}
+                      width={14}
+                      height={14}
                     />
-                    <h3 className="w-full text-slate-100 text-semibold text-sm hidden lg:block">
+                    <h3 className="w-full text-slate-100 text-semibold text-sm hidden md:block">
                       {link.title}
                     </h3>
                   </Link>
