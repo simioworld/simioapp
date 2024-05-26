@@ -14,7 +14,7 @@ export const eventDefaultValues = {
   eventType: "Carrera",
   carCategory: "GT2",
   location: "Barcelona",
-  simulator: "Assetto Corsa Competizione",
+  simulator: "Assetto Corsa",
   startDate: "01/01/2028",
   startTime: "12:00",
   duration: "60",
