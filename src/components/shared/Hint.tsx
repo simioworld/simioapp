@@ -24,7 +24,7 @@ const Hint = ({
   align = "start",
   sideOffset = 4,
   alignOffset = 4,
-  simulators = ["Assetto Corsa Competizione"],
+  simulators,
 }: HintProps) => {
   return (
     <TooltipProvider>
@@ -38,7 +38,7 @@ const Hint = ({
           alignOffset={alignOffset}
         >
           <h3 className="font-semibold capitalize">{label}</h3>
-          <p className="font-light">{simulators.join(" / ")}</p>
+          {simulators && <p className="font-light">{simulators.join(" / ")}</p>}
         </TooltipContent>
       </Tooltip>
     </TooltipProvider>
