@@ -7,9 +7,11 @@ interface ImageBackgroundProps {
 }
 
 const ImageBackground = ({ route }: ImageBackgroundProps) => {
+  const path = route.split("/").at(-1);
+  console.log(path);
   return (
     <Image
-      src={`/assets/images/${route}.webp`}
+      src={`/assets/images/${path}.webp`}
       alt={route}
       fill
       sizes={imageBackgroundSize}
