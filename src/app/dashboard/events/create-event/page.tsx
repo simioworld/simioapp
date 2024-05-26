@@ -10,7 +10,7 @@ const CreateEventPage = () => {
       <h3
         className={`${staatliches.className} text-3xl text-center text-slate-300`}
       >
-        <span className="text-slate-100/80">Crea</span> un evento de simracing
+        <span className="text-slate-100/80">Crea</span> un evento
       </h3>
       <EventForm userId={userId} type="Crear" />
     </section>
