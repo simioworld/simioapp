@@ -36,7 +36,6 @@ import Car from "./Car";
 import Location from "./Location";
 import Person from "./Person";
 import Timer from "./Timer";
-import { toast } from "sonner";
 import { Id } from "../../../../convex/_generated/dataModel";
 import { useUser } from "@clerk/nextjs";
 
@@ -86,22 +85,22 @@ const EventForm = ({ type }: EventFormProps) => {
         });
 
         if (newEvent) {
-          toast.success("Evento creado correctamente");
           form.reset();
           router.push(`/dashboard/events/${newEvent}`);
         }
       } catch (error) {
-        toast.error("Error al crear el evento");
+        // gestionar errores
+        return alert(error);
       }
     }
   };
 
   return (
-    <article className="p-2 overflow-hidden flex flex-col place-items-center w-full sm:min-w-3/5    z-20 text-slate-100/80">
+    <article className="p-2 overflow-hidden flex flex-col place-items-center w-full sm:min-w-3/5 z-20 text-slate-100/80">
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(SubmitHandler)}
-          className="flex flex-col gap-5 w-full px-4"
+          className="flex flex-col gap-5 w-full lg:px-4"
         >
           <div className="flex flex-col gap-2">
             <FormField
@@ -122,7 +121,7 @@ const EventForm = ({ type }: EventFormProps) => {
                 </FormItem>
               )}
             />
-            <div className="flex flex-col sm:flex-row sm:justify-between gap-2 sm:gap-4 ">
+            <div className="flex flex-row sm:justify-between gap-2 sm:gap-4 ">
               <FormField
                 control={form.control}
                 name="eventType"
@@ -177,7 +176,7 @@ const EventForm = ({ type }: EventFormProps) => {
                 )}
               />
             </div>
-            <div className="flex flex-col sm:flex-row sm:justify-between gap-2 sm:gap-4 ">
+            <div className="flex flex-row sm:justify-between gap-2 sm:gap-4 ">
               <FormField
                 control={form.control}
                 name="location"
@@ -237,7 +236,7 @@ const EventForm = ({ type }: EventFormProps) => {
               />
             </div>
 
-            <div className="flex flex-col sm:flex-row sm:justify-between gap-2 sm:gap-4 ">
+            <div className="flex   flex-row sm:justify-between gap-2 sm:gap-4 ">
               <FormField
                 control={form.control}
                 name="communityName"
@@ -298,122 +297,124 @@ const EventForm = ({ type }: EventFormProps) => {
                 </FormItem>
               )}
             />
-            <div className="flex flex-col sm:flex-row sm:justify-between gap-2 sm:gap-4 ">
-              <FormField
-                control={form.control}
-                name="price"
-                render={({ field }) => (
-                  <FormItem className="space-y-0">
-                    <FormLabel className="">Precio</FormLabel>
-                    <FormControl>
-                      <div className="flex items-center overflow-hidden h-7 rounded-md bg-neutral-100 py-2 text-sm relative">
-                        <Price
-                          stroke="#333"
-                          className="lucide lucide-euro absolute left-1 top-1/2 transform -translate-y-1/2"
-                        />
+            <div className="flex flex-col xs:flex-row sm:justify-between gap-2 sm:gap-4 ">
+              <div className="flex flex-row sm:justify-between gap-2 sm:gap-4 ">
+                <FormField
+                  control={form.control}
+                  name="price"
+                  render={({ field }) => (
+                    <FormItem className="space-y-0 w-full">
+                      <FormLabel className="">Precio</FormLabel>
+                      <FormControl>
+                        <div className="flex items-center overflow-hidden h-7 rounded-md bg-neutral-100 py-2 text-sm relative">
+                          <Price
+                            stroke="#333"
+                            className="lucide lucide-euro absolute left-1 top-1/2 transform -translate-y-1/2"
+                          />
 
+                          <Input
+                            placeholder=""
+                            {...field}
+                            className="input-field pl-6"
+                          />
+                        </div>
+                      </FormControl>
+
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  name="slots"
+                  render={({ field }) => (
+                    <FormItem className="space-y-0 w-full">
+                      <FormLabel className="">Plazas</FormLabel>
+                      <FormControl>
+                        <div className="flex items-center overflow-hidden h-7 rounded-md bg-neutral-100 py-2 text-sm relative">
+                          <Person
+                            stroke="#333"
+                            className="lucide lucide-user-round absolute left-1 top-1/2 transform -translate-y-1/2 "
+                          />
+                          <Input
+                            placeholder=""
+                            {...field}
+                            className="input-field pl-6"
+                          />
+                        </div>
+                      </FormControl>
+
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              </div>
+              <div className="flex flex-row sm:justify-between gap-2 sm:gap-4 ">
+                <FormField
+                  control={form.control}
+                  name="startDate"
+                  render={({ field }) => (
+                    <FormItem className="space-y-0 w-full">
+                      <FormLabel className="">Fecha</FormLabel>
+                      <FormControl>
                         <Input
-                          placeholder=""
+                          type="date"
+                          placeholder="Fecha del evento"
                           {...field}
-                          className="input-field pl-6"
+                          className="input-field"
                         />
-                      </div>
-                    </FormControl>
+                      </FormControl>
 
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <FormField
-                control={form.control}
-                name="slots"
-                render={({ field }) => (
-                  <FormItem className="space-y-0">
-                    <FormLabel className="">Plazas</FormLabel>
-                    <FormControl>
-                      <div className="flex items-center overflow-hidden h-7 rounded-md bg-neutral-100 py-2 text-sm relative">
-                        <Person
-                          stroke="#333"
-                          className="lucide lucide-user-round absolute left-1 top-1/2 transform -translate-y-1/2 "
-                        />
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  name="startTime"
+                  render={({ field }) => (
+                    <FormItem className="space-y-0 w-full">
+                      <FormLabel className="">Hora</FormLabel>
+                      <FormControl>
                         <Input
-                          placeholder=""
+                          type="time"
+                          placeholder="Hora del evento"
                           {...field}
-                          className="input-field pl-6"
+                          className="input-field"
                         />
-                      </div>
-                    </FormControl>
+                      </FormControl>
 
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />{" "}
+              </div>
             </div>
-            <div className="flex flex-col sm:flex-row sm:justify-between gap-2 sm:gap-4 ">
-              <FormField
-                control={form.control}
-                name="startDate"
-                render={({ field }) => (
-                  <FormItem className="space-y-0">
-                    <FormLabel className="">Fecha</FormLabel>
-                    <FormControl>
-                      <Input
-                        type="date"
-                        placeholder="Fecha del evento"
-                        {...field}
-                        className="input-field"
+            <FormField
+              control={form.control}
+              name="duration"
+              render={({ field }) => (
+                <FormItem className="space-y-0">
+                  <FormLabel className="">Duración</FormLabel>
+                  <FormControl>
+                    <div className="flex items-center overflow-hidden h-7 rounded-md bg-neutral-100 py-2 text-sm relative">
+                      <Timer
+                        stroke="#333"
+                        className="lucide lucide-hour-glass absolute left-1 top-1/2 transform -translate-y-1/2"
                       />
-                    </FormControl>
-
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <FormField
-                control={form.control}
-                name="startTime"
-                render={({ field }) => (
-                  <FormItem className="space-y-0">
-                    <FormLabel className="">Hora</FormLabel>
-                    <FormControl>
                       <Input
-                        type="time"
-                        placeholder="Hora del evento"
+                        type="text"
+                        placeholder="minutos"
                         {...field}
-                        className="input-field"
+                        className="pl-6 input-field"
                       />
-                    </FormControl>
+                    </div>
+                  </FormControl>
 
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />{" "}
-              <FormField
-                control={form.control}
-                name="duration"
-                render={({ field }) => (
-                  <FormItem className="space-y-0">
-                    <FormLabel className="">Duración</FormLabel>
-                    <FormControl>
-                      <div className="flex items-center overflow-hidden h-7 rounded-md bg-neutral-100 py-2 text-sm relative">
-                        <Timer
-                          stroke="#333"
-                          className="lucide lucide-hour-glass absolute left-1 top-1/2 transform -translate-y-1/2"
-                        />
-                        <Input
-                          type="text"
-                          placeholder="minutos"
-                          {...field}
-                          className="pl-6 input-field"
-                        />
-                      </div>
-                    </FormControl>
-
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-            </div>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
           </div>
           <Button
             className={`bg-orange-500/90 py-1 text-xl text-slate-800 ${staatliches.className} hover:bg-orange-500`}
