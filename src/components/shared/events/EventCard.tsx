@@ -8,6 +8,7 @@ import Location from "./Location";
 import Car from "./Car";
 import Person from "./Person";
 import { CarCategories, EventTypes, Simulators } from "@/types";
+import Timer from "./Timer";
 
 export interface EventCardProps {
   _id: Id<"events">;
@@ -99,14 +100,14 @@ const EventCard = ({ event }: { event: EventCardProps }) => {
               </div>
 
               <div className=" flex flex-col ">
-                <div className=" flex justify-between gap-1 ">
-                  <Image
-                    src="/assets/icons/clock.svg"
-                    alt="reloj"
-                    width={12}
-                    height={12}
-                    className="text-neutral-200"
+                <div className=" flex justify-between gap-1 items-center  ">
+                  <Timer
+                    stroke="#f1f5f9"
+                    width={10}
+                    height={10}
+                    className="lucide lucide-hourglass "
                   />
+
                   <p className="text-xxs text-right ">{event.duration} min</p>
                 </div>
                 <div className="flex gap-1 justify-between">
