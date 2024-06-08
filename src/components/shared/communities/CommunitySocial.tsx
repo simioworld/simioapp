@@ -2,114 +2,69 @@ import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { CommunitySocialStructure } from "@/types";
+import WebIcon from "../icons/Web";
+import DiscordIcon from "../icons/Discord";
+import TwitterIcon from "../icons/Twitter";
+import InstagramIcon from "../icons/Instagram";
+import TwitchIcon from "../icons/Twitch";
+import FacebookIcon from "../icons/Facebook";
+import YoutubeIcon from "../icons/Youtube";
 
 interface CommunitySocialProps {
   communitySocial: CommunitySocialStructure;
 }
 const CommunitySocial = ({ communitySocial }: CommunitySocialProps) => {
   return (
-    <ul className=" mx-auto flex items-center justify-between gap-2 bg-slate-800 rounded-md px-4 w-fit">
-      <li>
-        <Link
-          href={communitySocial.web ? communitySocial.web : "#"}
-          target="_blank"
-        >
-          Web
-        </Link>
-      </li>
-      <li>
-        <Link
-          href={
-            communitySocial.discordCommunity
-              ? communitySocial.discordCommunity
-              : "#"
-          }
-          target="_blank"
-        >
-          <div className="flex justify-center items-center bg-[#5865F2] rounded-full w-full p-2 hover:scale-105 transition-all duration-500">
-            <Image
-              src="/assets/icons/discord.svg"
-              width={20}
-              height={20}
-              alt="Discord"
-            />
-          </div>
-        </Link>
-      </li>
-      <li>
-        {communitySocial.instagram && (
+    <ul className=" mx-auto flex items-center justify-between sm:gap-2 bg-slate-600 rounded-md px-4 py-2">
+      {communitySocial.discord && (
+        <li className="w-10 h-10 flex items-center">
+          <Link href={communitySocial.discord} target="_blank">
+            <DiscordIcon />
+          </Link>
+        </li>
+      )}
+      {communitySocial.instagram && (
+        <li className="w-10 h-10 flex items-center">
           <Link href={communitySocial.instagram} target="_blank">
-            <div className="flex justify-center items-center rounded-full w-full p-2 hover:scale-105 transition-all duration-500">
-              <Image
-                src="/assets/icons/instagram.svg"
-                width={36}
-                height={36}
-                alt="Instagram"
-              />
-            </div>
+            <InstagramIcon />
           </Link>
-        )}
-      </li>
-      <li>
-        {communitySocial.twitter && (
+        </li>
+      )}
+      {communitySocial.twitter && (
+        <li className="w-10 h-10 flex items-center">
           <Link href={communitySocial.twitter} target="_blank">
-            <div className="flex justify-center items-center rounded-full w-full p-2 hover:scale-105 transition-all duration-500 bg-black">
-              <Image
-                src="/assets/icons/twitter.svg"
-                width={20}
-                height={20}
-                alt="twitter"
-                className="invert"
-              />
-            </div>
+            <TwitterIcon />
           </Link>
-        )}
-      </li>
-      <li>
-        {communitySocial.twitch && (
+        </li>
+      )}
+      {communitySocial.twitch && (
+        <li className="w-10 h-10 flex items-center">
           <Link href={communitySocial.twitch} target="_blank">
-            <div className="flex justify-center items-center rounded-full w-full p-2 hover:scale-105 transition-all duration-500  ">
-              <Image
-                src="/assets/icons/twitch.svg"
-                width={36}
-                height={36}
-                alt="twitch"
-                className="rounded-full"
-              />
-            </div>
+            <TwitchIcon />
           </Link>
-        )}
-      </li>
-      <li>
-        {communitySocial.facebook && (
+        </li>
+      )}{" "}
+      {communitySocial.facebook && (
+        <li className="w-10 h-10 flex items-center">
           <Link href={communitySocial.facebook} target="_blank">
-            <div className="flex justify-center items-center rounded-full w-full p-2 hover:scale-105 transition-all duration-500">
-              <Image
-                src="/assets/icons/facebook.svg"
-                width={36}
-                height={36}
-                alt="facebook"
-                className="bg-white rounded-full"
-              />
-            </div>
+            <FacebookIcon />
           </Link>
-        )}
-      </li>
-      <li>
-        {communitySocial.youtube && (
+        </li>
+      )}{" "}
+      {communitySocial.youtube && (
+        <li className="w-10 h-10 flex items-center">
           <Link href={communitySocial.youtube} target="_blank">
-            <div className="flex justify-center items-center rounded-full w-full p-2 hover:scale-105 transition-all duration-500">
-              <Image
-                src="/assets/icons/youtube.svg"
-                width={36}
-                height={36}
-                alt="youtube"
-                className=" rounded-full"
-              />
-            </div>
+            <YoutubeIcon />
           </Link>
-        )}
-      </li>
+        </li>
+      )}{" "}
+      {communitySocial.web && (
+        <li className="w-10 h-10 flex items-center">
+          <Link href={communitySocial.web} target="_blank">
+            <WebIcon />
+          </Link>
+        </li>
+      )}
     </ul>
   );
 };
