@@ -4,6 +4,7 @@ import {
   carCategoryValues,
   eventTypeValues,
   simulatorValues,
+  social,
 } from "./constants";
 
 export default defineSchema(
@@ -36,8 +37,8 @@ export default defineSchema(
       description: v.optional(v.string()),
       admins: v.optional(v.string()),
       discordCommunity: v.string(),
-
       logo: v.optional(v.string()),
+      social: social,
       web: v.optional(v.string()),
       twitch: v.optional(v.string()),
       twitter: v.optional(v.string()),
