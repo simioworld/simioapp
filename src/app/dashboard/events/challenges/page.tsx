@@ -11,12 +11,12 @@ const ChallengeEvents = () => {
 
   return (
     <section className="w-full self-stretch  flex flex-col  gap-2 xs:pl-8">
-      <h2
-        className={`${staatliches.className} text-3xl font-bold text-slate-800/90 `}
+      <h1
+        className={`${staatliches.className} text-3xl font-bold text-slate-800/70 `}
       >
         Retos
-      </h2>
-      <ul className="flex flex-wrap items-center  gap-3">
+      </h1>
+      <ul className="flex flex-wrap items-center gap-3">
         {championshipEvents?.map((event) => {
           return (
             <li key={event.title} className="opacity-70">

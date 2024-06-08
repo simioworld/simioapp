@@ -16,7 +16,7 @@ const CommunitiesLayout = ({ children }: { children: React.ReactNode }) => {
         <NavCommunities />
       </SubHeader>
 
-      <div className="flex flex-col px-4 sm:flex-row items-center  pt-10 pb-4 w-full ">
+      <div className="flex flex-col sm:px-4 sm:flex-row items-center pt-2 sm:pt-10 pb-4 w-full ">
         {children}
       </div>
     </section>

@@ -20,19 +20,15 @@ const CommunityPage = () => {
 
   return (
     <section className="relative p-4 sm:p-6 flex flex-col h-full text-slate-200 gap-4">
-      <div className="flex gap-4 items-center">
+      <div className="flex flex-col sm:flex-row gap-4 items-center">
         <Image
           src={`${community.logo}`}
           alt={community.name}
           width={250}
           height={100}
         />
-        {/*         <h3
-          className={`${staatliches.className} tracking-wide font-bold uppercase text-6xl text-slate-10 self-center`}
-        >
-          {community.name}
-        </h3> */}
-        <CommunitySocial communitySocial={community} />
+
+        <CommunitySocial communitySocial={community.social} />
       </div>
       <p className="mt-2 font-light">{community.description}</p>
 

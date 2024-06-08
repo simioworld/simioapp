@@ -94,7 +94,7 @@ const EventPage = () => {
               <div className=" flex flex-col gap-0 sm:gap-1 ">
                 <div className="relative flex items-center justify-end gap-1 ">
                   <Timer stroke="#f1f5f9" />
-                  <p className=" text-right text-sm  text-slate-300 pl-6">
+                  <p className=" text-right text-sm text-slate-300">
                     {event.duration} min
                   </p>
                 </div>
@@ -142,7 +142,7 @@ const EventPage = () => {
                 target="_blank"
               >
                 <Image
-                  src={"/assets/icons/discord.svg"}
+                  src={"/assets/icons/social/discord.svg"}
                   alt={"discord"}
                   width={16}
                   height={16}

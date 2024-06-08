@@ -11,9 +11,9 @@ import React from "react";
 const EventLayout = ({ children }: { children: React.ReactNode }) => {
   const pathname = usePathname();
   return (
-    <section className="overflow-hidden  h-full relative flex flex-col items-center w-full   ">
+    <section className="w-full h-full flex flex-col items-center justify-center overflow-hidden relative">
       <ImageBackground route={pathname} />
-      <div className="flex flex-row justify-start w-full px-4">
+      <div className="w-full flex flex-row justify-between px-2">
         <SubHeader title="Eventos" path={pathname}>
           <NavEvents />
         </SubHeader>
@@ -29,7 +29,7 @@ const EventLayout = ({ children }: { children: React.ReactNode }) => {
           </Hint>
         </div>
       </div>
-      <div className="flex flex-col px-4 sm:flex-row items-center pt-4 lg:pt-10 pb-4 w-full ">
+      <div className="w-full flex flex-col sm:flex-row items-center justify-center p-4 lg:pt-10 ">
         {children}
       </div>
     </section>

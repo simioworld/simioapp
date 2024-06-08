@@ -11,7 +11,7 @@ const SubHeader = ({ children, title, path }: NavEventsProps) => {
   if (!path) return null;
   const splitedPath = path?.split("/").at(2);
   return (
-    <header className="relative py-2 px-2 w-full flex flex-row  md:gap-4 items-center justify-between  opacity-80">
+    <header className="w-full flex flex-row md:gap-4 items-center justify-between py-2 relative opacity-80">
       <div className="flex flex-row gap-2 md:gap-4 items-center">
         <Link href={`/dashboard/${splitedPath}`}>
           <h2

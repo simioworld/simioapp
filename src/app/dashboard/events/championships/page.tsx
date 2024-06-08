@@ -10,13 +10,13 @@ const ChampionshipsEvents = () => {
   });
 
   return (
-    <section className="w-full self-stretch flex flex-col gap-2 xs:pl-8">
-      <h2
-        className={`${staatliches.className} text-3xl font-bold text-slate-800/90 `}
+    <section className="w-full justify-center flex flex-col gap-2 xs:pl-8">
+      <h1
+        className={`${staatliches.className} text-center text-3xl font-bold text-slate-800/70`}
       >
         Campeonatos
-      </h2>
-      <ul className="flex flex-wrap  gap-3">
+      </h1>
+      <ul className="flex flex-wrap items-center justify-center gap-3">
         {championshipEvents?.map((event) => {
           return (
             <li key={event.title} className="opacity-70">
