@@ -26,3 +26,21 @@ export const eventTypeValues = v.union(
   v.literal("Reto"),
   v.literal("Resistencia")
 );
+
+export const web = v.optional(v.string());
+export const discord = v.string();
+export const twitter = v.optional(v.string());
+export const twitch = v.optional(v.string());
+export const youtube = v.optional(v.string());
+export const instagram = v.optional(v.string());
+export const facebook = v.optional(v.string());
+
+export const social = v.object({
+  web,
+  discord,
+  twitter,
+  twitch,
+  youtube,
+  instagram,
+  facebook,
+});
