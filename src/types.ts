@@ -9,6 +9,7 @@ export interface UserStructure {
 
 export interface CommunityStructure {
   discordCommunity?: string;
+  social: CommunitySocialStructure;
   web?: string;
   instagram?: string;
   twitter?: string;
@@ -22,10 +23,15 @@ export interface CommunityStructure {
   simulators?: string[];
 }
 
-export type CommunitySocialStructure = Omit<
-  CommunityStructure,
-  "logo" | "simulators" | "name" | "description" | "admins"
->;
+export type CommunitySocialStructure = {
+  discord: string;
+  web?: string;
+  instagram?: string;
+  twitter?: string;
+  twitch?: string;
+  facebook?: string;
+  youtube?: string;
+};
 
 export type CarCategories = "GT2" | "GT3" | "GT4" | "Porsche Cup" | "Otra";
 
