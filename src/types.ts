@@ -1,3 +1,5 @@
+import { Id } from "../convex/_generated/dataModel";
+
 export interface UserStructure {
   clerkId: string;
   email: string;
@@ -5,6 +7,26 @@ export interface UserStructure {
   firstName?: string;
   lastName?: string;
   photo?: string;
+}
+
+export interface EventStructure {
+  _id: Id<"events">;
+  title: string;
+  eventType: EventTypes;
+  carCategory: CarCategories;
+  location: string;
+  simulator: Simulators;
+  description: string;
+  startDate: string;
+  startTime: string;
+  duration: string;
+  slots: string;
+  price?: string;
+  communityName: string;
+  communityId: string;
+  discordCommunity: string;
+  authorId: Id<"users">;
+  userName: string;
 }
 
 export interface CommunityStructure {
