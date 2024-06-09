@@ -1,4 +1,4 @@
-import { v } from "convex/values";
+import { ConvexError, v } from "convex/values";
 import { query } from "./_generated/server";
 
 export const getCommunity = query({
@@ -9,7 +9,7 @@ export const getCommunity = query({
     const community = await ctx.db.get(args.communityId);
 
     if (!community) {
-      throw new Error("Community not found");
+      throw new ConvexError("Community not found");
     }
 
     return community;
@@ -26,7 +26,7 @@ export const getCommunityId = query({
       .filter((q) => q.eq(q.field("name"), args.communityName))
       .unique();
     if (!community) {
-      throw new Error("Comunidad no encontrada");
+      throw new ConvexError("Community not found");
     }
     return community._id;
   },
@@ -39,7 +39,7 @@ export const getCommunityEvents = query({
   handler: async (ctx, args) => {
     const community = await ctx.db.get(args.communityId);
     if (!community) {
-      throw new Error("Community not found");
+      throw new ConvexError("Community not found");
     }
 
     const events = await ctx.db
