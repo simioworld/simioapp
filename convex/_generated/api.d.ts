@@ -21,6 +21,7 @@ import type * as constants from "../constants.js";
 import type * as event from "../event.js";
 import type * as events from "../events.js";
 import type * as http from "../http.js";
+import type * as user from "../user.js";
 import type * as users from "../users.js";
 
 /**
@@ -39,6 +40,7 @@ declare const fullApi: ApiFromModules<{
   event: typeof event;
   events: typeof events;
   http: typeof http;
+  user: typeof user;
   users: typeof users;
 }>;
 export declare const api: FilterApi<
