@@ -1,4 +1,4 @@
-import { v } from "convex/values";
+import { ConvexError, v } from "convex/values";
 import { mutation, query } from "./_generated/server";
 
 export const createEvent = mutation({
@@ -45,7 +45,21 @@ export const createEvent = mutation({
     const identity = await ctx.auth.getUserIdentity();
 
     if (!identity) {
-      throw new Error("Usuario no autorizado");
+      throw new ConvexError("User not authenticated");
+    }
+
+    const user = await ctx.db
+      .query("users")
+      .filter((q) => q.eq(q.field("email"), identity.email))
+      .unique();
+
+    // Adrian choose if(user.length == 0)
+    if (!user) {
+      throw new ConvexError("User not found");
+    }
+
+    if (!user.username) {
+      throw new ConvexError("Not username found");
     }
 
     const newEvent = await ctx.db.insert("events", {
@@ -63,8 +77,8 @@ export const createEvent = mutation({
       communityName: arg.communityName,
       communityId: arg.communityId,
       discordCommunity: arg.discordCommunity,
-      authorId: arg.authorId,
-      userName: identity.nickname!,
+      authorId: user._id,
+      userName: user.username,
     });
     return newEvent;
   },
