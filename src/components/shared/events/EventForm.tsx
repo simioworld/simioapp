@@ -47,6 +47,10 @@ const EventForm = ({ type }: EventFormProps) => {
   const router = useRouter();
   const { isSignedIn, user } = useUser();
 
+  const identity = useQuery(api.user.getUser, { clerkId: user?.id as string });
+
+  const communities = useQuery(api.communities.getCommunities, {});
+
   const form = useForm<z.infer<typeof eventFormSchema>>({
     resolver: zodResolver(eventFormSchema),
     defaultValues: eventDefaultValues,
@@ -54,17 +58,14 @@ const EventForm = ({ type }: EventFormProps) => {
 
   const createEvent = useMutation(api.events.createEvent);
   const SubmitHandler = async (values: z.infer<typeof eventFormSchema>) => {
-    const communityId = useQuery(api.community.getCommunityId, {
-      communityName: values.communityName,
-    });
     if (type === "Crear") {
       try {
         if (!isSignedIn)
           throw new Error("Para crear un evento hay que estar autenticado");
         if (!user) throw new Error("No hay usuario autenticado");
-
-        if (!communityId) throw new Error("No se encontro la comunidad");
-
+        const communityId = communities?.find(
+          (community) => community.name === values.communityName
+        )?._id as Id<"communities">;
         const newEvent = await createEvent({
           title: values.title,
           eventType: values.eventType,
@@ -80,7 +81,7 @@ const EventForm = ({ type }: EventFormProps) => {
           communityName: values.communityName,
           communityId: communityId,
           discordCommunity: values.discordCommunity,
-          authorId: user.id as Id<"users">,
+          authorId: identity as Id<"users">,
           userName: user.username as string,
         });
 
@@ -243,7 +244,7 @@ const EventForm = ({ type }: EventFormProps) => {
                 render={({ field }) => (
                   <FormItem className="w-full space-y-0">
                     <FormLabel className="">Organizador</FormLabel>
-                    <FormControl>
+                    {/*                  <FormControl>
                       <div className="flex items-center overflow-hidden h-7 w-full rounded-md bg-neutral-100 py-2 text-sm relative">
                         <Input
                           placeholder="Comunidad"
@@ -251,7 +252,29 @@ const EventForm = ({ type }: EventFormProps) => {
                           className="input-field pl-2"
                         />
                       </div>
-                    </FormControl>
+                    </FormControl> */}
+                    <Select
+                      onValueChange={field.onChange}
+                      defaultValue={field.value}
+                    >
+                      <FormControl>
+                        <div className="flex items-center overflow-hidden h-7 w-full rounded-md bg-neutral-100  py-2 text-sm relative">
+                          <SelectTrigger className="pl-6">
+                            <SelectValue placeholder="Comunidad" />
+                          </SelectTrigger>
+                        </div>
+                      </FormControl>
+                      <SelectContent>
+                        {communities?.map((community) => (
+                          <SelectItem
+                            key={community._id}
+                            value={community.name}
+                          >
+                            {community.name}
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
 
                     <FormMessage />
                   </FormItem>
